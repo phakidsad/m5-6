@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ลงทะเบียนเลือกฝ่าย</title>
+</head>
+<body>
+    <h2>เลือกฝ่ายที่คุณต้องการ</h2>
+    <input type="text" id="name" placeholder="ชื่อ-นามสกุล">
+    <select id="team">
+        <option value="ฝ่าย A">ฝ่าย จัดของ</option>
+        <option value="ฝ่าย B">ฝ่าย ยกของ</option>
+        <option value="ฝ่าย C">ฝ่าย จัดสถานที่</option>
+    </select>
+    <button onclick="submitForm()">ตกลง</button>
+
+    <script>
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const team = document.getElementById('team').value;
+            // นำ URL ที่คัดลอกมาวางแทนที่ตรงนี้ครับ
+            const url = "https://script.google.com/macros/s/AKfycby_9TgRBYk9Cv_zbr_oRMlzcyVQV9yVfjy7KQZaraKJvnDoqaqUMHRZAb8RMfgE-1E0/exec";
+
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify({ name: name, team: team })
+            }).then(() => alert("ลงทะเบียนเรียบร้อย!"));
+        }
+    </script>
+</body>
+</html>
