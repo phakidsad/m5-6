@@ -1,0 +1,38 @@
+/* จัดหน้าจอให้เป็นช่องว่างที่มองเห็นได้ */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* ให้สูงเต็มหน้าจอ */
+    display: flex;
+    justify-content: center; /* จัดแนวนอนให้อยู่กลาง */
+    align-items: center;     /* จัดแนวตั้งให้อยู่กลาง */
+    font-family: sans-serif;
+    background-color: #f4f4f9; /* ใส่สีพื้นหลังให้ดูสบายตา */
+}
+
+/* จัดกลุ่มกล่องเนื้อหา */
+.container {
+    display: flex;
+    flex-direction: column; /* ให้เรียงต่อกันแนวตั้ง */
+    gap: 15px;             /* ระยะห่างระหว่างช่องกรอกกับปุ่ม */
+    padding: 30px;
+    background: white;
+    border-radius: 10px;   /* ทำมุมโค้ง */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ใส่เงาให้ดูนูนออกมา */
+    text-align: center;
+}
+
+/* แต่งช่องกรอกและปุ่มให้สวย */
+input, select, button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
