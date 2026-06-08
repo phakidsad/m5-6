@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ลงทะเบียนเลือกฝ่าย</title>
+    <meta charset="UTF-8">
+    <title>ลงทะเบียนเลือกฝ่าย - ม.5/6</title> 
+    <link rel="stylesheet" href="style.css">
+</head>
 </head>
 <body>
-    <h2>เลือกฝ่ายที่คุณต้องการ</h2>
-    <input type="text" id="name" placeholder="ชื่อ-นามสกุล">
-    <select id="team">
-        <option value="ฝ่าย A">ฝ่าย จัดของ</option>
-        <option value="ฝ่าย B">ฝ่าย ยกของ</option>
-        <option value="ฝ่าย C">ฝ่าย จัดสถานที่</option>
-    </select>
-    <button onclick="submitForm()">ตกลง</button>
+    <div class="container">
+        <input type="text" id="name" placeholder="ชื่อ-นามสกุล">
+        <select id="team">
+            <option value="ฝ่าย A">ฝ่าย A("ฝ่าย จัดของ") </option>
+            <option value="ฝ่าย B">ฝ่าย B("ฝ่าย ยกของ") </option>
+            <option value="ฝ่าย C">ฝ่าย C("ฝ่าย จัดสถานที่") </option>
+        </select>
+        <button onclick="submitForm()">ตกลง</button>
+    </div>
 
     <script>
-        function submitForm() {
+        async function submitForm() {
             const name = document.getElementById('name').value;
             const team = document.getElementById('team').value;
-            // นำ URL ที่คัดลอกมาวางแทนที่ตรงนี้ครับ
-            const url = "https://script.google.com/macros/s/AKfycby_9TgRBYk9Cv_zbr_oRMlzcyVQV9yVfjy7KQZaraKJvnDoqaqUMHRZAb8RMfgE-1E0/exec";
+            const url = "https://script.google.com/macros/s/AKfycbz79Uq2DZnCH3plCX4Wjl-rkqq1LSyz4RakGOoAnWJ3lcz7Q3FJkkRDoSxsLYtZe-dVwQ/exec"; // URL ที่ได้จากขั้นตอน Deploy
 
-            fetch(url, {
-                method: "POST",
-                body: JSON.stringify({ name: name, team: team })
-            }).then(() => alert("ลงทะเบียนเรียบร้อย!"));
+            // เช็คจำนวนก่อน
+            const res = await fetch(url);
+            const status = await res.json();
+
+            // เช็คว่าเต็มไหม
+            if (status[team] && status[team].current >= status[team].max) {
+                alert("ฝ่ายนี้เต็มแล้วครับ!");
+            } else {
+                // ถ้าไม่เต็ม ให้ส่งข้อมูล
+                await fetch(url, { method: "POST", body: JSON.stringify({ name, team }) });
+                alert("ลงทะเบียนสำเร็จ");
+            }
         }
     </script>
 </body>
